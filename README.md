@@ -1,12 +1,9 @@
 
-
-
 ## blog
 
 
-http://laixinz.com source code.
+https://jizhizhu.github.io/ source code.
 
 ## License
 
 [MIT](LICENSE)
-
