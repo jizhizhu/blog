@@ -4,7 +4,7 @@
 ## blog
 
 
-https://jizhizhu.github.io/ source code.
+http://laixinz.com source code.
 
 ## License
 
