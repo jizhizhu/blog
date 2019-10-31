@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="zh-hans"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" /><title>Thinking in Java摘抄（异常） | Peninsula</title><meta name="generator" content="Jekyll v4.0.0" /><meta property="og:title" content="Thinking in Java摘抄（异常）" /><meta name="author" content="jizhizhu" /><meta property="og:locale" content="en_US" /><meta name="description" content="异常" /><meta property="og:description" content="异常" /><link rel="canonical" href="http://laixinz.com//2019/10/TiJ-6.html" /><meta property="og:url" content="http://laixinz.com//2019/10/TiJ-6.html" /><meta property="og:site_name" content="Peninsula" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2019-10-15T00:00:00+08:00" /> <script type="application/ld+json"> {"url":"http://laixinz.com//2019/10/TiJ-6.html","author":{"@type":"Person","name":"jizhizhu"},"headline":"Thinking in Java摘抄（异常）","dateModified":"2019-10-15T00:00:00+08:00","datePublished":"2019-10-15T00:00:00+08:00","description":"异常","mainEntityOfPage":{"@type":"WebPage","@id":"http://laixinz.com//2019/10/TiJ-6.html"},"@type":"BlogPosting","@context":"https://schema.org"}</script><link rel="stylesheet" href="/public/css/styles.css"><link rel="stylesheet" href="/public/plugins/fancybox/jquery.fancybox.min.css" media="all"><link rel="stylesheet" href="/public/fonts/caomei/style.css" media="all"><style> .content a, .related-posts li a:hover { color: #dc322f; } ::selection { color: #fff; background: #dc322f; } ::-moz-selection { color: #fff; background: #dc322f; }</style><link rel="icon" type="image/jpeg" href="/public/images/icons/launcher-icon-128x128.jpeg"><link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/images/icons/launcher-icon-152x152.jpeg"><link rel="alternate" type="application/feed+xml" title="Peninsula" href="/feed.xml"><link rel="manifest" href="/manifest.json"> <script src="/public/js/jquery.min.js"></script> <script src="/public/js/highlight.min.js"></script> <script src="/public/plugins/fancybox/jquery.fancybox.min.js"></script> <script async> (function (i, s, o, g, r, a, m) { i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); ga('create', '', 'auto'); ga('send', 'pageview'); </script> <script> var _hmt = _hmt || []; (function () { var hm = document.createElement("script"); hm.src = "https://hm.baidu.com/hm.js?"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s); })(); </script></head><body class="theme-base-08"><main class="content container"><article class="post"><h1 class="post-title">Thinking in Java摘抄（异常）</h1><div class="post-date"> <span>发表于 <time datetime="2019-10-15T00:00:00+08:00">2019年10月15日</time> &middot;</span> 阅读量 <span id="busuanzi_value_page_pv">加载中...</span></div><hr class="post-divide"><h2 id="异常">异常</h2><ul><li><p>“异常”这个词有“我对此感到意外”的意思。问题出现了，你也许不清楚该如何处理，但你的确知道不应该置之不理，你要停下来，看看是不是有别人或在别的地方，能够处理这个问题。只是在当前的环境中还没有足够的信息来解决这个问题，所以就把这个问题提交到一个更高级别的环境中，在那里将作出正确的决定。</p><blockquote><p>异常往往能降低错误处理代码的复杂度。如果不使用异常，那么就必须检查特定的错误，并在程序中的许多地方去处理它。而如果使用异常，那就不必在方法调用处进行检查，因为异常机制将保证能够捕获这个错误。理想情况下，只需在一个地方处理错误，即所谓的异常处理程序中。这种方式不仅节省代码，而且把“描述在正常执行过程中做什么事”的代码和“出了问题怎么办”的代码相分离。总之，与以前的错误处理方法相比，异常机制使代码的阅读、编写和调试工作更加井井有条。</p></blockquote></li><li><p>取异常堆栈：</p><blockquote><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">StringWriter</span> <span class="n">trace</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringWriter</span><span class="o">();</span>
+<span class="n">printStackTrace</span><span class="o">(</span><span class="k">new</span> <span class="nc">PrintWriter</span><span class="o">(</span><span class="n">trace</span><span class="o">));</span>
+<span class="n">logger</span><span class="o">.</span><span class="na">severe</span><span class="o">(</span><span class="n">trace</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</code></pre></div></div></blockquote></li><li><p>异常说明使用了附加的关键字 throws，后面接一个所有潜在异常类型的列表，所以方法定义可能看起来像这样：</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">f</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">TooBig</span><span class="o">,</span> <span class="nc">TooSmall</span><span class="o">,</span> <span class="nc">DivZero</span> <span class="o">{</span> <span class="c1">// ...</span>
+</code></pre></div></div><p>但是，要是这样写：</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">f</span><span class="o">()</span> <span class="o">{</span> <span class="c1">// ...</span>
+</code></pre></div></div><p>就表示此方法不会抛出任何异常（除了从 RuntimeException 继承的异常，它们可以在没有异常说明的情况下被抛出，这些将在后面进行讨论）。</p><p>代码必须与异常说明保持一致。如果方法里的代码产生了异常却没有进行处理，编译器会发现这个问题并提醒你：要么处理这个异常，要么就在异常说明中表明此方法将产生异常。通过这种自顶向下强制执行的异常说明机制，Java 在编译时就可以保证一定水平的异常正确性。</p><p>不过还是有个能“作弊”的地方：可以声明方法将抛出异常，实际上却不抛出。编译器相信了这个声明，并强制此方法的用户像真的抛出异常那样使用这个方法。这样做的好处是，为异常先占个位子，以后就可以抛出这种异常而不用修改已有的代码。在定义抽象基类和接口时这种能力很重要，这样派生类或接口实现就能够抛出这些预先声明的异常。</p><p>这种在编译时被强制检查的异常称为被检查的异常。</p></li><li><p>printStackTrace() 方法所提供的信息可以通过 getStackTrace() 方法来直接访问，这个方法将返回一个由栈轨迹中的元素所构成的数组，其中每一个元素都表示栈中的一桢。元素 0 是栈顶元素，并且是调用序列中的最后一个方法调用（这个 Throwable 被创建和抛出之处）。数组中的最后一个元素和栈底是调用序列中的第一个方法调用。</p></li><li><p>有时希望把刚捕获的异常重新抛出，尤其是在使用 Exception 捕获所有异常的时候。既然已经得到了对当前异常对象的引用，可以直接把它重新抛出：</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"An exception was thrown"</span><span class="o">);</span>
+    <span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div><p>重抛异常会把异常抛给上一级环境中的异常处理程序，同一个 try 块的后续 catch 子句将被忽略。此外，异常对象的所有信息都得以保持，所以高一级环境中捕获此异常的处理程序可以从这个异常对象中得到所有信息。</p><p>如果只是把当前异常对象重新抛出，那么 printStackTrace() 方法显示的将是原来异常抛出点的调用栈信息，而并非重新抛出点的信息。要想更新这个信息，可以调用 filInStackTrace() 方法，这将返回一个 Throwable 对象，它是通过把当前调用栈信息填入原来那个异常对象而建立的。</p><p>有可能在捕获异常之后抛出另一种异常。这么做的话，得到的效果类似于使用 filInStackTrace()，有关原来异常发生点的信息会丢失，剩下的是与新的抛出点有关的信息。</p></li><li><p>在 Java 7 之前，如果遇到异常，则只能重新抛出该类型的异常。这导致在 Java 7 中修复的代码不精确。所以在 Java 7 之前，这无法编译：</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">BaseException</span> <span class="kd">extends</span> <span class="nc">Exception</span> <span class="o">{}</span>
+<span class="kd">class</span> <span class="nc">DerivedException</span> <span class="kd">extends</span> <span class="nc">BaseException</span> <span class="o">{}</span>
+  
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PreciseRethrow</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">catcher</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">DerivedException</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">DerivedException</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">BaseException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div><p>因为 catch 捕获了一个 BaseException，编译器强迫你声明 catcher() 抛出 BaseException，即使它实际上抛出了更具体的 DerivedException。从 Java 7 开始，这段代码就可以编译，这是一个很小但很有用的修复。</p></li><li><p>异常链：常常会想要在捕获一个异常后抛出另一个异常，并且希望把原始异常的信息保存下来，这被称为异常链。在 JDK1.4 以前，程序员必须自己编写代码来保存原始异常的信息。现在所有 Throwable 的子类在构造器中都可以接受一个 cause（因由）对象作为参数。这个 cause 就用来表示原始异常，这样通过把原始异常传递给新的异常，使得即使在当前位置创建并抛出了新的异常，也能通过这个异常链追踪到异常最初发生的位置。</p><p>有趣的是，在 Throwable 的子类中，只有三种基本的异常类提供了带 cause 参数的构造器。它们是 Error（用于 Java 虚拟机报告系统错误）、Exception 以及 RuntimeException。如果要把其他类型的异常链接起来，应该使用 initCause0 方法而不是构造器。</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">DynamicFieldsException</span> <span class="n">dfe</span> <span class="o">=</span>
+                    <span class="k">new</span> <span class="nf">DynamicFieldsException</span><span class="o">();</span>
+            <span class="n">dfe</span><span class="o">.</span><span class="na">initCause</span><span class="o">(</span><span class="k">new</span> <span class="nc">NullPointerException</span><span class="o">());</span>
+            <span class="k">throw</span> <span class="n">dfe</span><span class="o">;</span>
+</code></pre></div></div><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">catch</span><span class="o">(</span><span class="nc">NoSuchFieldException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+<span class="c1">// Use constructor that takes "cause":</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+</code></pre></div></div></li><li><p>异常限制：当覆盖方法的时候，只能抛出在基类方法的异常说明里列出的那些异常。这个限制很有用，因为这意味着，若当基类使用的代码应用到其派生类对象的时候，一样能够工作（当然，这是面向对象的基本概念），异常也不例外。</p><p>下面例子演示了这种（在编译时）施加在异常上面的限制：</p><blockquote><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// exceptions/StormyInning.java</span>
+<span class="c1">// Overridden methods can throw only the exceptions</span>
+<span class="c1">// specified in their base-class versions, or exceptions</span>
+<span class="c1">// derived from the base-class exceptions</span>
+<span class="kd">class</span> <span class="nc">BaseballException</span> <span class="kd">extends</span> <span class="nc">Exception</span> <span class="o">{}</span>
+<span class="kd">class</span> <span class="nc">Foul</span> <span class="kd">extends</span> <span class="nc">BaseballException</span> <span class="o">{}</span>
+<span class="kd">class</span> <span class="nc">Strike</span> <span class="kd">extends</span> <span class="nc">BaseballException</span> <span class="o">{}</span>
+<span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Inning</span> <span class="o">{</span>
+    <span class="nc">Inning</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">BaseballException</span> <span class="o">{}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">event</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">BaseballException</span> <span class="o">{</span>
+<span class="c1">// Doesn't actually have to throw anything</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">atBat</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Strike</span><span class="o">,</span> <span class="nc">Foul</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">walk</span><span class="o">()</span> <span class="o">{}</span> <span class="c1">// Throws no checked exceptions</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">StormException</span> <span class="kd">extends</span> <span class="nc">Exception</span> <span class="o">{}</span>
+<span class="kd">class</span> <span class="nc">RainedOut</span> <span class="kd">extends</span> <span class="nc">StormException</span> <span class="o">{}</span>
+<span class="kd">class</span> <span class="nc">PopFoul</span> <span class="kd">extends</span> <span class="nc">Foul</span> <span class="o">{}</span>
+<span class="kd">interface</span> <span class="nc">Storm</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">event</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">RainedOut</span><span class="o">;</span>
+    <span class="kt">void</span> <span class="nf">rainHard</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">RainedOut</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StormyInning</span> <span class="kd">extends</span> <span class="nc">Inning</span> <span class="kd">implements</span> <span class="nc">Storm</span> <span class="o">{</span>
+    <span class="c1">// OK to add new exceptions for constructors, but you</span>
+<span class="c1">// must deal with the base constructor exceptions:</span>
+    <span class="kd">public</span> <span class="nf">StormyInning</span><span class="o">()</span>
+            <span class="kd">throws</span> <span class="nc">RainedOut</span><span class="o">,</span> <span class="nc">BaseballException</span> <span class="o">{}</span>
+    <span class="kd">public</span> <span class="nf">StormyInning</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span>
+            <span class="kd">throws</span> <span class="nc">BaseballException</span> <span class="o">{}</span>
+    <span class="c1">// Regular methods must conform to base class:</span>
+<span class="c1">//- void walk() throws PopFoul {} //Compile error</span>
+<span class="c1">// Interface CANNOT add exceptions to existing</span>
+<span class="c1">// methods from the base class:</span>
+<span class="c1">//- public void event() throws RainedOut {}</span>
+<span class="c1">// If the method doesn't already exist in the</span>
+<span class="c1">// base class, the exception is OK:</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">rainHard</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">RainedOut</span> <span class="o">{}</span>
+    <span class="c1">// You can choose to not throw any exceptions,</span>
+<span class="c1">// even if the base version does:</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">event</span><span class="o">()</span> <span class="o">{}</span>
+    <span class="c1">// Overridden methods can throw inherited exceptions:</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">atBat</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">PopFoul</span> <span class="o">{}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">StormyInning</span> <span class="n">si</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StormyInning</span><span class="o">();</span>
+            <span class="n">si</span><span class="o">.</span><span class="na">atBat</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">PopFoul</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Pop foul"</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">RainedOut</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Rained out"</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">BaseballException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Generic baseball exception"</span><span class="o">);</span>
+        <span class="o">}</span>
+<span class="c1">// Strike not thrown in derived version.</span>
+        <span class="k">try</span> <span class="o">{</span>
+<span class="c1">// What happens if you upcast?</span>
+            <span class="nc">Inning</span> <span class="n">i</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StormyInning</span><span class="o">();</span>
+            <span class="n">i</span><span class="o">.</span><span class="na">atBat</span><span class="o">();</span>
+<span class="c1">// You must catch the exceptions from the</span>
+<span class="c1">// base-class version of the method:</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">Strike</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Strike"</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">Foul</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Foul"</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">RainedOut</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Rained out"</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">BaseballException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Generic baseball exception"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div><p>在 Inning 类中，可以看到构造器和 event() 方法都声明将抛出异常，但实际上没有抛出。这种方式使你能强制用户去捕获可能在覆盖后的 event() 版本中增加的异常，所以它很合理。这对于抽象方法同样成立，比如 atBat()。</p><p>接口 Storm 包含了一个在 Inning 中定义的方法 event() 和一个不在 Inning 中定义的方法 rainHard()。这两个方法都抛出新的异常 RainedOut，如果 StormyInning 类在扩展 Inning 类的同时又实现了 Storm 接口，那么 Storm 里的 event() 方法就不能改变在 Inning 中的 event（方法的异常接口。否则的话，在使用基类的时候就不能判断是否捕获了正确的异常，所以这也很合理。当然，如果接口里定义的方法不是来自于基类，比如 rainHard()，那么此方法抛出什么样的异常都没有问题。</p><p>异常限制对构造器不起作用。你会发现 StormyInning 的构造器可以抛出任何异常，而不必理会基类构造器所抛出的异常。然而，因为基类构造器必须以这样或那样的方式被调用（这里默认构造器将自动被调用），派生类构造器的异常说明必须包含基类构造器的异常说明。</p><p>派生类构造器不能捕获基类构造器抛出的异常。</p><p>StormyInning.walk() 不能通过编译是因为它抛出了异常，而 Inning.walk() 并没有声明此异常。如果编译器允许这么做的话，就可以在调用 Inning.walk() 的时候不用做异常处理了，而且当把它替换成 Inning 的派生类的对象时，这个方法就有可能会抛出异常，于是程序就失灵了。通过强制派生类遵守基类方法的异常说明，对象的可替换性得到了保证。</p><p>覆盖后的 event() 方法表明，派生类方法可以不抛出任何异常，即使它是基类所定义的异常。同样这是因为，假使基类的方法会抛出异常，这样做也不会破坏已有的程序，所以也没有问题。类似的情况出现在 atBat() 身上，它抛出的是 PopFoul，这个异常是继承自“会被基类的 atBat() 抛出”的 Foul，这样，如果你写的代码是同 Inning 打交道，并且调用了它的 atBat() 的话，那么肯定能捕获 Foul，而 PopFoul 是由 Foul 派生出来的，因此异常处理程序也能捕获 PopFoul。</p><p>最后一个值得注意的地方是 main()。这里可以看到，如果处理的刚好是 Stormylnning 对象的话，编译器只会强制要求你捕获这个类所抛出的异常。但是如果将它向上转型成基类型，那么编译器就会（正确地）要求你捕获基类的异常。所有这些限制都是为了能产生更为强壮的异常处理代码。</p><p>尽管在继承过程中，编译器会对异常说明做强制要求，但异常说明本身并不属于方法类型的一部分，方法类型是由方法的名字与参数的类型组成的。因此，不能基于异常说明来重载方法。此外，一个出现在基类方法的异常说明中的异常，不一定会出现在派生类方法的异常说明里。这点同继承的规则明显不同，在继承中，基类的方法必须出现在派生类里，换句话说，在继承和覆盖的过程中，某个特定方法的“异常说明的接口”不是变大了而是变小了——这恰好和类接口在继承时的情形相反。</p></blockquote></li><li><p>构造器中的异常处理方式：</p><blockquote><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">NeedsCleanup2</span> <span class="n">nc4</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NeedsCleanup2</span><span class="o">();</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="nc">NeedsCleanup2</span> <span class="n">nc5</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NeedsCleanup2</span><span class="o">();</span>
+                <span class="k">try</span> <span class="o">{</span>
+                <span class="c1">// ...</span>
+                <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+                    <span class="n">nc5</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+                <span class="o">}</span>
+            <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">ConstructionException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// nc5 const.</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+                <span class="n">nc4</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">ConstructionException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// nc4 const.</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+</code></pre></div></div><ul><li>[1] 相当简单，遵循了在可去除对象之后紧跟 try-finally 的原则。如果对象构造不会失败，就不需要任何 catch。</li><li>[2] 为了构造和清理，可以看到将具有不能失败的构造器的对象分组在一起。</li><li>[3] 展示了如何处理那些具有可以失败的构造器，且需要清理的对象。为了正确处理这种情况，事情变得很棘手，因为对于每一个构造，都必须包含在其自己的 try-finally 语句块中，并且每一个对象构造必须都跟随一个 try-finally 语句块以确保清理。</li></ul></blockquote></li><li><p>Java 7 引入了 try-with-resources 语法来简化关闭资源操作：</p><blockquote><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TryWithResources</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span><span class="o">(</span>
+                <span class="nc">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span>
+                        <span class="k">new</span> <span class="nf">File</span><span class="o">(</span><span class="s">"TryWithResources.java"</span><span class="o">))</span>
+        <span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">contents</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+            <span class="c1">// Process contents</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// Handle the error</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div><p>在 Java 7 之前，try 总是后面跟着一个 {，但是现在可以跟一个带括号的定义 - 这里是我们创建的 FileInputStream 对象。括号内的部分称为资源规范头（resource specification header）。现在可用于整个 try 块的其余部分。更重要的是，无论你如何退出 try 块（正常或异常），都会执行下面这个 finally 子句的等价物:</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MessyExceptions</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span>
+                    <span class="k">new</span> <span class="nf">File</span><span class="o">(</span><span class="s">"MessyExceptions.java"</span><span class="o">));</span>
+            <span class="kt">int</span> <span class="n">contents</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+            <span class="c1">// Process contents</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// Handle the error</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">in</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="c1">// Handle the close() error</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div><p>但不会编写那些杂乱而棘手的代码。这是一项重要的改进。</p><p>它是如何工作的？在 try-with-resources 定义子句中创建的对象（在括号内）必须实现 java.lang.AutoCloseable 接口，这个接口有一个方法：close()。当在 Java 7 中引入 AutoCloseable 时，许多接口和类被修改以实现它；查看 Javadocs 中的 AutoCloseable，可以找到所有实现该接口的类列表，其中包括 Stream 对象：</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StreamsAreAutoCloseable</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span>
+    <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span><span class="o">{</span>
+        <span class="k">try</span><span class="o">(</span>
+                <span class="nc">Stream</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">in</span> <span class="o">=</span> <span class="nc">Files</span><span class="o">.</span><span class="na">lines</span><span class="o">(</span>
+                        <span class="nc">Paths</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"StreamsAreAutoCloseable.java"</span><span class="o">));</span>
+                <span class="nc">PrintWriter</span> <span class="n">outfile</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PrintWriter</span><span class="o">(</span>
+                        <span class="s">"Results.txt"</span><span class="o">);</span> <span class="c1">// [1]</span>
+        <span class="o">)</span> <span class="o">{</span>
+            <span class="n">in</span><span class="o">.</span><span class="na">skip</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">limit</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">String:</span><span class="o">:</span><span class="n">toLowerCase</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">forEachOrdered</span><span class="o">(</span><span class="nl">outfile:</span><span class="o">:</span><span class="n">println</span><span class="o">);</span>
+        <span class="o">}</span> <span class="c1">// [2]</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div><ul><li>[1] 你在这里可以看到其他的特性：资源规范头中可以包含多个定义，并且通过分号进行分割（最后一个分号是可选的）。规范头中定义的每个对象都会在 try 语句块运行结束之后调用 close() 方法。</li><li>[2] try-with-resources 里面的 try 语句块可以不包含 catch 或者 finally 语句而独立存在。在这里，IOException 被 main() 方法抛出，所以这里并不需要在 try 后面跟着一个 catch 语句块。</li></ul><p>Java 5 中的 Closeable 已经被修改，修改之后的接口继承了 AutoCloseable 接口。所以所有实现了 Closeable 接口的对象，都支持了 try-with-resources 特性。</p></blockquote></li></ul></article><span class="tags"> 标签： <a href="/tags.html#Tij" title="Tij">#Tij</a>&nbsp; </span><div style="margin-top: 1rem;padding-left: 0;"><hr class="post-divide" /></div><div class="post-pagination"> <a class="float-left" href="/2019/10/TiJ-5.html" title="Thinking in Java摘抄（流式编程）">« Thinking in Java摘抄（流式编程）</a> <a class="float-right" href="/2019/10/TiJ-7.html" title="Thinking in Java摘抄（Files）">Thinking in Java摘抄（Files） »</a></div><div class="clearfix"></div></main><div id="_backdrop"></div><a id="_menu" href="#_sidebar">☰</a><aside id="_sidebar" class="sidebar" style="background-image:url('/public/images/mountains.jpg')" ><div class="container sidebar-sticky"><div class="sidebar-about"><h1> <a href="" title="Peninsula"> Peninsula </a></h1><p>关于编程、生活、游戏和我的一些思考。</p></div><nav class="sidebar-nav"> <a class="sidebar-nav-item" href="/">主页</a> <a class="sidebar-nav-item" href="/tags.html">标签</a> <a class="sidebar-nav-item" href="/links.html">友链</a> <a class="sidebar-nav-item" href="/about.html">关于</a></nav><div class="sidebar-social"> <a href="https://github.com/jizhizhu" title="Github" target="_blank" data-no-instant><span class="icon czs-github-logo"></span></a> <a href="/feed.xml"><span class="icon czs-rss"></span></a></div></div></aside><script src="/public/js/drawer.min.js"></script> <script src="/public/js/instantclick.min.js" data-no-instant></script> <script type="text/javascript"> $(document).ready(function () { $("p img").each(function () { var wrapA = "<a data-fancybox='gallery' href='" + this.src + "'></a>"; $(this).wrapAll(wrapA); }); }); var isLoad = false; InstantClick.on('change', function (isInitialLoad) { var blocks = document.querySelectorAll('pre code'); for (var i = 0; i < blocks.length; i++) { hljs.highlightBlock(blocks[i]); } if (isInitialLoad === false) { if (typeof ga !== 'undefined') ga('send', 'pageview', location.pathname + location.search); } if (!isLoad) { isLoad = true; $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"); } }); InstantClick.init('mousedown'); /*** * Put your custom script here */ if (navigator.platform.match(/win32/i)) { var cssId = 'webkit-scrollbar'; if (!document.getElementById(cssId)) { var head = document.getElementsByTagName('head')[0]; var style = document.createElement('style'); style.id = cssId; style.innerText = ` ::-webkit-scrollbar { width: 6px; height: 6px; background-color: #fff; } ::-webkit-scrollbar-track { background-color: #fff; } ::-webkit-scrollbar-thumb { background-color: #ccc; border: 1px solid #ddd; } `; head.appendChild(style); } } </script></body></html>
