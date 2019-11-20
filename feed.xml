@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://laixinz.com//feed.xml" rel="self" type="application/atom+xml" /><link href="http://laixinz.com//" rel="alternate" type="text/html" /><updated>2019-11-01T18:42:28+08:00</updated><id>http://laixinz.com//feed.xml</id><title type="html">Peninsula</title><subtitle>关于编程、生活、游戏和我的一些思考。
-</subtitle><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><entry><title type="html">Thinking in Java摘抄（类型信息）</title><link href="http://laixinz.com//2019/10/TiJ-9.html" rel="alternate" type="text/html" title="Thinking in Java摘抄（类型信息）" /><published>2019-10-19T00:00:00+08:00</published><updated>2019-10-19T00:00:00+08:00</updated><id>http://laixinz.com//2019/10/TiJ-9</id><content type="html" xml:base="http://laixinz.com//2019/10/TiJ-9.html">&lt;h2 id=&quot;类型信息&quot;&gt;类型信息&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://lckclub.com//feed.xml" rel="self" type="application/atom+xml" /><link href="http://lckclub.com//" rel="alternate" type="text/html" /><updated>2019-11-20T16:03:58+08:00</updated><id>http://lckclub.com//feed.xml</id><title type="html">Peninsula</title><subtitle>关于编程、生活、游戏和我的一些思考。
+</subtitle><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><entry><title type="html">Thinking in Java摘抄（类型信息）</title><link href="http://lckclub.com//2019/10/TiJ-9.html" rel="alternate" type="text/html" title="Thinking in Java摘抄（类型信息）" /><published>2019-10-19T00:00:00+08:00</published><updated>2019-10-19T00:00:00+08:00</updated><id>http://lckclub.com//2019/10/TiJ-9</id><content type="html" xml:base="http://lckclub.com//2019/10/TiJ-9.html">&lt;h2 id=&quot;类型信息&quot;&gt;类型信息&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;RTTI（RunTime Type Information，运行时类型信息）能够在程序运行时发现和使用类型信息。本章将讨论 Java 是如何在运行时识别对象和类信息的。主要有两种方式：
@@ -136,7 +136,7 @@
   &lt;li&gt;在查询类型信息时，以&lt;code class=&quot;highlighter-rouge&quot;&gt;instanceof&lt;/code&gt;的形式（即以&lt;code class=&quot;highlighter-rouge&quot;&gt;instanceof&lt;/code&gt;的形式或&lt;code class=&quot;highlighter-rouge&quot;&gt;isInstance()&lt;/code&gt;的形式，它们产生相同的结果）与直接比较 Class对象有一个很重要的差别： &lt;code class=&quot;highlighter-rouge&quot;&gt;instanceof&lt;/code&gt;保持了类型的概念，它指的是“你是这个类，还是从这个类的派生类？”；另一方面，如果使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;==&lt;/code&gt; 或 &lt;code class=&quot;highlighter-rouge&quot;&gt;equals()&lt;/code&gt; 比较实际的 &lt;code class=&quot;highlighter-rouge&quot;&gt;Class&lt;/code&gt; 对象，则与继承无关 —— 它要么是这个确切的类型，要么不是。&lt;/li&gt;
   &lt;li&gt;当使用反射与未知类型的对象交互时，JVM 只是简单地检查这个对象，看它属于哪个特定的类（就像RTTI那样）。在对其执行任何操作之前，必须先加载那个类的 &lt;code class=&quot;highlighter-rouge&quot;&gt;Class&lt;/code&gt; 对象。因此，那个类的 &lt;code class=&quot;highlighter-rouge&quot;&gt;.class&lt;/code&gt; 文件对于 JVM 来说必须是可获取的：要么在本地计算机上，要么可以通过网络取得。所以RTTI 和反射之间真正的区别只在于，对 RTTI 来说，编译器在编译时打开和检查 &lt;code class=&quot;highlighter-rouge&quot;&gt;.class&lt;/code&gt; 文件。（换句话说，我们可以用“普通”方式调用对象的所有方法。）而对于反射机制来说，&lt;code class=&quot;highlighter-rouge&quot;&gt;.class&lt;/code&gt; 文件在编译时是不可获取的，所以是在运行时打开和检查&lt;code class=&quot;highlighter-rouge&quot;&gt;.class&lt;/code&gt; 文件。&lt;/li&gt;
   &lt;li&gt;没有任何方式可以阻止反射到达并调用那些非公共访问权限的方法；对于域来说也是如此，即便是private域，但是final域实际上在遭遇反射修改时是安全的。运行时系统会在不抛异常的情况下接受任何修改的尝试，但是实际上不会发生任何修改。&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><category term="Tij" /><summary type="html">类型信息</summary></entry><entry><title type="html">Thinking in Java摘抄（Files）</title><link href="http://laixinz.com//2019/10/TiJ-7.html" rel="alternate" type="text/html" title="Thinking in Java摘抄（Files）" /><published>2019-10-18T00:00:00+08:00</published><updated>2019-10-18T00:00:00+08:00</updated><id>http://laixinz.com//2019/10/TiJ-7</id><content type="html" xml:base="http://laixinz.com//2019/10/TiJ-7.html">&lt;h2 id=&quot;files&quot;&gt;Files&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><category term="Tij" /><summary type="html">类型信息</summary></entry><entry><title type="html">Thinking in Java摘抄（Files）</title><link href="http://lckclub.com//2019/10/TiJ-7.html" rel="alternate" type="text/html" title="Thinking in Java摘抄（Files）" /><published>2019-10-18T00:00:00+08:00</published><updated>2019-10-18T00:00:00+08:00</updated><id>http://lckclub.com//2019/10/TiJ-7</id><content type="html" xml:base="http://lckclub.com//2019/10/TiJ-7.html">&lt;h2 id=&quot;files&quot;&gt;Files&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -453,7 +453,7 @@ Cheese.txt: 199
       &lt;p&gt;因为我们在同一个块中执行所有操作，所以这两个文件都可以在相同的try-with-resources语句中打开。&lt;code class=&quot;highlighter-rouge&quot;&gt;PrintWriter&lt;/code&gt; 是一个旧式的&lt;code class=&quot;highlighter-rouge&quot;&gt;java.io&lt;/code&gt; 类，允许你“打印”到一个文件，所以它是这个应用程序的理想选择。如果你看一下 &lt;code class=&quot;highlighter-rouge&quot;&gt;StreamInAndOut.txt&lt;/code&gt;，你会发现它确实是大写的。&lt;/p&gt;
     &lt;/blockquote&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><category term="Tij" /><summary type="html">Files</summary></entry><entry><title type="html">Thinking in Java摘抄（字符串）</title><link href="http://laixinz.com//2019/10/TiJ-8.html" rel="alternate" type="text/html" title="Thinking in Java摘抄（字符串）" /><published>2019-10-18T00:00:00+08:00</published><updated>2019-10-18T00:00:00+08:00</updated><id>http://laixinz.com//2019/10/TiJ-8</id><content type="html" xml:base="http://laixinz.com//2019/10/TiJ-8.html">&lt;h2 id=&quot;字符串&quot;&gt;字符串&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><category term="Tij" /><summary type="html">Files</summary></entry><entry><title type="html">Thinking in Java摘抄（字符串）</title><link href="http://lckclub.com//2019/10/TiJ-8.html" rel="alternate" type="text/html" title="Thinking in Java摘抄（字符串）" /><published>2019-10-18T00:00:00+08:00</published><updated>2019-10-18T00:00:00+08:00</updated><id>http://lckclub.com//2019/10/TiJ-8</id><content type="html" xml:base="http://lckclub.com//2019/10/TiJ-8.html">&lt;h2 id=&quot;字符串&quot;&gt;字符串&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -790,7 +790,7 @@ DatabaseException: (t3, q7) Write failed
       &lt;p&gt;其实在&lt;code class=&quot;highlighter-rouge&quot;&gt;String.format()&lt;/code&gt;内部，它也是创建了一个&lt;code class=&quot;highlighter-rouge&quot;&gt;Formatter&lt;/code&gt;对象，然后将你传入的参数转给&lt;code class=&quot;highlighter-rouge&quot;&gt;Formatter&lt;/code&gt;。不过，与其自己做这些事情，不如使用便捷的&lt;code class=&quot;highlighter-rouge&quot;&gt;String.format()&lt;/code&gt;方法，何况这样的代码更清晰易读。&lt;/p&gt;
     &lt;/blockquote&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><category term="Tij" /><summary type="html">字符串</summary></entry><entry><title type="html">Thinking in Java摘抄（异常）</title><link href="http://laixinz.com//2019/10/TiJ-6.html" rel="alternate" type="text/html" title="Thinking in Java摘抄（异常）" /><published>2019-10-15T00:00:00+08:00</published><updated>2019-10-15T00:00:00+08:00</updated><id>http://laixinz.com//2019/10/TiJ-6</id><content type="html" xml:base="http://laixinz.com//2019/10/TiJ-6.html">&lt;h2 id=&quot;异常&quot;&gt;异常&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><category term="Tij" /><summary type="html">字符串</summary></entry><entry><title type="html">Thinking in Java摘抄（异常）</title><link href="http://lckclub.com//2019/10/TiJ-6.html" rel="alternate" type="text/html" title="Thinking in Java摘抄（异常）" /><published>2019-10-15T00:00:00+08:00</published><updated>2019-10-15T00:00:00+08:00</updated><id>http://lckclub.com//2019/10/TiJ-6</id><content type="html" xml:base="http://lckclub.com//2019/10/TiJ-6.html">&lt;h2 id=&quot;异常&quot;&gt;异常&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -1086,7 +1086,7 @@ DatabaseException: (t3, q7) Write failed
       &lt;p&gt;Java 5 中的 Closeable 已经被修改，修改之后的接口继承了 AutoCloseable 接口。所以所有实现了 Closeable 接口的对象，都支持了 try-with-resources 特性。&lt;/p&gt;
     &lt;/blockquote&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><category term="Tij" /><summary type="html">异常</summary></entry><entry><title type="html">Thinking in Java摘抄（集合）</title><link href="http://laixinz.com//2019/10/TiJ-3.html" rel="alternate" type="text/html" title="Thinking in Java摘抄（集合）" /><published>2019-10-12T00:00:00+08:00</published><updated>2019-10-12T00:00:00+08:00</updated><id>http://laixinz.com//2019/10/TiJ-3</id><content type="html" xml:base="http://laixinz.com//2019/10/TiJ-3.html">&lt;h2 id=&quot;持有对象&quot;&gt;持有对象&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><category term="Tij" /><summary type="html">异常</summary></entry><entry><title type="html">Thinking in Java摘抄（集合）</title><link href="http://lckclub.com//2019/10/TiJ-3.html" rel="alternate" type="text/html" title="Thinking in Java摘抄（集合）" /><published>2019-10-12T00:00:00+08:00</published><updated>2019-10-12T00:00:00+08:00</updated><id>http://lckclub.com//2019/10/TiJ-3</id><content type="html" xml:base="http://lckclub.com//2019/10/TiJ-3.html">&lt;h2 id=&quot;持有对象&quot;&gt;持有对象&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -1296,7 +1296,7 @@ fleas has dog My
     &lt;/blockquote&gt;
   &lt;/li&gt;
   &lt;li&gt;如果由 &lt;code class=&quot;highlighter-rouge&quot;&gt;Arrays.asList()&lt;/code&gt; 生成的 &lt;strong&gt;List&lt;/strong&gt; 被直接打乱，那么它将修改底层数组。重要的是要注意 &lt;code class=&quot;highlighter-rouge&quot;&gt;Arrays.asList()&lt;/code&gt; 生成一个 &lt;strong&gt;List&lt;/strong&gt; 对象，该对象使用底层数组作为其物理实现。如果执行的操作会修改这个 &lt;strong&gt;List&lt;/strong&gt; ，并且不希望修改原始数组，那么就应该在另一个集合中创建一个副本。&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><category term="Tij" /><summary type="html">持有对象</summary></entry><entry><title type="html">Thinking in Java摘抄（流式编程）</title><link href="http://laixinz.com//2019/10/TiJ-5.html" rel="alternate" type="text/html" title="Thinking in Java摘抄（流式编程）" /><published>2019-10-12T00:00:00+08:00</published><updated>2019-10-12T00:00:00+08:00</updated><id>http://laixinz.com//2019/10/TiJ-5</id><content type="html" xml:base="http://laixinz.com//2019/10/TiJ-5.html">&lt;h2 id=&quot;流式编程&quot;&gt;流式编程&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><category term="Tij" /><summary type="html">持有对象</summary></entry><entry><title type="html">Thinking in Java摘抄（流式编程）</title><link href="http://lckclub.com//2019/10/TiJ-5.html" rel="alternate" type="text/html" title="Thinking in Java摘抄（流式编程）" /><published>2019-10-12T00:00:00+08:00</published><updated>2019-10-12T00:00:00+08:00</updated><id>http://lckclub.com//2019/10/TiJ-5</id><content type="html" xml:base="http://lckclub.com//2019/10/TiJ-5.html">&lt;h2 id=&quot;流式编程&quot;&gt;流式编程&lt;/h2&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;集合优化了对象的存储，而流和对象的处理有关。&lt;/p&gt;
@@ -1735,7 +1735,7 @@ It's a wonderful day for pie!
       &lt;/ul&gt;
     &lt;/blockquote&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><category term="Tij" /><summary type="html">流式编程</summary></entry><entry><title type="html">Thinking in Java摘抄（函数式编程）</title><link href="http://laixinz.com//2019/10/TiJ-4.html" rel="alternate" type="text/html" title="Thinking in Java摘抄（函数式编程）" /><published>2019-10-12T00:00:00+08:00</published><updated>2019-10-12T00:00:00+08:00</updated><id>http://laixinz.com//2019/10/TiJ-4</id><content type="html" xml:base="http://laixinz.com//2019/10/TiJ-4.html">&lt;h2 id=&quot;函数式编程&quot;&gt;函数式编程&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><category term="Tij" /><summary type="html">流式编程</summary></entry><entry><title type="html">Thinking in Java摘抄（函数式编程）</title><link href="http://lckclub.com//2019/10/TiJ-4.html" rel="alternate" type="text/html" title="Thinking in Java摘抄（函数式编程）" /><published>2019-10-12T00:00:00+08:00</published><updated>2019-10-12T00:00:00+08:00</updated><id>http://lckclub.com//2019/10/TiJ-4</id><content type="html" xml:base="http://lckclub.com//2019/10/TiJ-4.html">&lt;h2 id=&quot;函数式编程&quot;&gt;函数式编程&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -2272,7 +2272,7 @@ foobaz
       &lt;p&gt;从输出结果我们可以看到 &lt;code class=&quot;highlighter-rouge&quot;&gt;p4&lt;/code&gt; 的工作流程：任何带有 &lt;code class=&quot;highlighter-rouge&quot;&gt;foo&lt;/code&gt; 的东西都会留下，即使它的长度大于 5。 &lt;code class=&quot;highlighter-rouge&quot;&gt;fongopuckey&lt;/code&gt; 因长度超出和不包含 &lt;code class=&quot;highlighter-rouge&quot;&gt;foo&lt;/code&gt; 而被丢弃。&lt;/p&gt;
     &lt;/blockquote&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><category term="Tij" /><summary type="html">函数式编程</summary></entry><entry><title type="html">Thinking in Java摘抄（接口，内部类）</title><link href="http://laixinz.com//2019/10/TiJ-2.html" rel="alternate" type="text/html" title="Thinking in Java摘抄（接口，内部类）" /><published>2019-10-11T00:00:00+08:00</published><updated>2019-10-11T00:00:00+08:00</updated><id>http://laixinz.com//2019/10/TiJ-2</id><content type="html" xml:base="http://laixinz.com//2019/10/TiJ-2.html">&lt;h2 id=&quot;接口&quot;&gt;接口&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><category term="Tij" /><summary type="html">函数式编程</summary></entry><entry><title type="html">Thinking in Java摘抄（接口，内部类）</title><link href="http://lckclub.com//2019/10/TiJ-2.html" rel="alternate" type="text/html" title="Thinking in Java摘抄（接口，内部类）" /><published>2019-10-11T00:00:00+08:00</published><updated>2019-10-11T00:00:00+08:00</updated><id>http://lckclub.com//2019/10/TiJ-2</id><content type="html" xml:base="http://lckclub.com//2019/10/TiJ-2.html">&lt;h2 id=&quot;接口&quot;&gt;接口&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -2532,7 +2532,7 @@ InnerClass method
       &lt;p&gt;所以使用局部内部类而不使用匿名内部类的另一个理由就是，需要不止一个该内部类的对象。&lt;/p&gt;
     &lt;/blockquote&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><category term="Tij" /><summary type="html">接口</summary></entry><entry><title type="html">Thinking in Java摘抄（访问权限控制，复用类，多态）</title><link href="http://laixinz.com//2019/10/TiJ-1.html" rel="alternate" type="text/html" title="Thinking in Java摘抄（访问权限控制，复用类，多态）" /><published>2019-10-10T00:00:00+08:00</published><updated>2019-10-10T00:00:00+08:00</updated><id>http://laixinz.com//2019/10/TiJ-1</id><content type="html" xml:base="http://laixinz.com//2019/10/TiJ-1.html">&lt;h2 id=&quot;访问权限控制&quot;&gt;访问权限控制&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><category term="Tij" /><summary type="html">接口</summary></entry><entry><title type="html">Thinking in Java摘抄（访问权限控制，复用类，多态）</title><link href="http://lckclub.com//2019/10/TiJ-1.html" rel="alternate" type="text/html" title="Thinking in Java摘抄（访问权限控制，复用类，多态）" /><published>2019-10-10T00:00:00+08:00</published><updated>2019-10-10T00:00:00+08:00</updated><id>http://lckclub.com//2019/10/TiJ-1</id><content type="html" xml:base="http://lckclub.com//2019/10/TiJ-1.html">&lt;h2 id=&quot;访问权限控制&quot;&gt;访问权限控制&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -2748,7 +2748,7 @@ RoundGlyph.RoundGlyph(), radius = 5
   &lt;li&gt;
     &lt;p&gt;使用继承设计程序时的通用准则：用继承表达行为间的差异，并用字段（组合）表达状态上的变化。&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><category term="Tij" /><summary type="html">访问权限控制</summary></entry><entry><title type="html">博客后期需要调整的内容</title><link href="http://laixinz.com//2019/10/blog-todo.html" rel="alternate" type="text/html" title="博客后期需要调整的内容" /><published>2019-10-03T00:00:00+08:00</published><updated>2019-10-03T00:00:00+08:00</updated><id>http://laixinz.com//2019/10/blog-todo</id><content type="html" xml:base="http://laixinz.com//2019/10/blog-todo.html">&lt;p&gt;记录一下博客后面需要调整的位置&lt;/p&gt;
+&lt;/ul&gt;</content><author><name>jizhizhu</name><email>laixin123@gmail.com</email></author><category term="Tij" /><summary type="html">访问权限控制</summary></entry><entry><title type="html">博客后期需要调整的内容</title><link href="http://lckclub.com//2019/10/blog-todo.html" rel="alternate" type="text/html" title="博客后期需要调整的内容" /><published>2019-10-03T00:00:00+08:00</published><updated>2019-10-03T00:00:00+08:00</updated><id>http://lckclub.com//2019/10/blog-todo</id><content type="html" xml:base="http://lckclub.com//2019/10/blog-todo.html">&lt;p&gt;记录一下博客后面需要调整的位置&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;sidebar.html里的logo图片暂时注释掉了&lt;/li&gt;
   &lt;li&gt;_config.yml里的头像图片暂时注释掉了&lt;/li&gt;
