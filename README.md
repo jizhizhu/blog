@@ -2,7 +2,7 @@
 ## blog
 
 
-https://lckclub.com/
+https://lckclub.com
 
 ## License
 
